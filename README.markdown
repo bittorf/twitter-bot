@@ -1,7 +1,6 @@
 # CLI Twitter status update bot
 
-* Author: [lukapusic](https://github.com/lukapusic) <luka@pusic.si>
-* URI: http://360percents.com/posts/command-line-twitter-status-update-for-linux-and-mac/
+* Author: Luka Pusic <luka@pusic.si>
 * Github: https://github.com/lukapusic/twitter-bot
 
 ## Description
@@ -13,7 +12,7 @@ This script can log into your Twitter account and post a new tweet, all without 
 
 ## Instructions
 1. apply executable permissions ```chmod +x ./tweet.sh```
-2. usage: ```./tweet.sh "Status"```
+2. usage: ```bash tweet.sh [tweet]```
 
 ## Changelog
 
@@ -23,8 +22,11 @@ This script can log into your Twitter account and post a new tweet, all without 
 ### 27.10.2012
 * The script is fixed now, fully supports SSL and logouts properly.
 
+### 2.12.2014
+* Adjusted the script to twitter changes. Removed --sslv3 curl parameter, changed the way we parse authenticity token. Tested on OSX.
+
 ## Known issues
-*
+* Sometimes when Twitter updates their website the script stops working, so don't rely on it 100%.
 
 ## License
 [CC-BY-NC](https://creativecommons.org/licenses/by-nc/2.0/), [Luka Pusic](http://pusic.si)

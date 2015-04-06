@@ -3,8 +3,8 @@
 #Author: Luka Pusic <luka@pusic.com>
 
 #REQUIRED PARAMS
-username="user..."
-password="pass..."
+username="username"
+password="passw0rd"
 tweet="$*" #must be less than 140 chars
 
 #EXTRA OPTIONS
@@ -35,7 +35,7 @@ composepage=$(curl -s -b "cookie.txt" -c "cookie.txt" -L -A "$uagent" "https://m
 #TWEET
 echo "[+] Posting a new tweet: $tweet..." && sleep $sleeptime
 tweettoken=$(echo "$composepage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1 | tail -n 1)
-update=$(curl -s -b "cookie.txt" -c "cookie.txt" -L -A "$uagent" -d "authenticity_token=$tweettoken&tweet[text]=$tweet&commit=Tweet" "https://mobile.twitter.com/")
+update=$(curl -s -b "cookie.txt" -c "cookie.txt" -L -A "$uagent" -d "wfa=1&authenticity_token=$tweettoken&tweet[text]=$tweet&commit=Tweet" "https://mobile.twitter.com/compose/tweet")
 
 #GRAB LOGOUT TOKENS
 logoutpage=$(curl -s -b "cookie.txt" -c "cookie.txt" -L -A "$uagent" "https://mobile.twitter.com/account")

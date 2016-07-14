@@ -1,6 +1,6 @@
 # CLI Twitter status update bot
 
-* Author: Luka Pusic <luka@pusic.si>
+* Author: Luka Pusic <luka@pusic.com>
 * Github: https://github.com/lukapusic/twitter-bot
 
 ## Description

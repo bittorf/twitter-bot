@@ -3,12 +3,12 @@
 # Author: Luka Pusic <luka@pusic.com>
 
 #REQUIRED PARAMS (Special characters must be urlencoded.)
-username=""
-password=""
+username=''
+password=''
 tweet="$*" # tweet length must be less than 140 chars
 
 #EXTRA OPTIONS
-uagent="Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0"
+uagent="Mozilla/5.0 (Series40; NokiaX2-02/10.90; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/1.0.2.26.11"
 sleeptime=0 # seconds between requests
 
 if [ $(echo "$tweet" | wc -c) -gt 140 ]; then
@@ -22,11 +22,11 @@ touch "cookie.txt" #create a temp. cookie file
 # GRAB LOGIN TOKENS
 echo "[+] Fetching twitter.com..." && sleep $sleeptime
 initpage=$(curl -s -b "cookie.txt" -c "cookie.txt" -L -A "$uagent" "https://mobile.twitter.com/session/new")
-token=$(echo "$initpage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1)
+token=$(echo "$initpage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1 | head -n 1)
 
 # LOGIN
 echo "[+] Submitting the login form..." && sleep $sleeptime
-loginpage=$(curl -s -b "cookie.txt" -c "cookie.txt" -L -A "$uagent" -d "authenticity_token=$token&session[username_or_email]=$username&session[password]=$password" "https://mobile.twitter.com/sessions")
+loginpage=$(curl -s -b "cookie.txt" -c "cookie.txt" -L -A "$uagent" -d "authenticity_token=$token&session[username_or_email]=$username&session[password]=$password&remember_me=1&wfa=1&commit=Log+in" "https://mobile.twitter.com/sessions")
 
 # CHECK IF LOGIN FAILED
 [[ "$loginpage" == *"/account/begin_password_reset"* ]] && { echo "[!] Login failed. Exiting."; exit; }
